@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/space-mono" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://picsum.photos/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-container input[type="text"] {
+            flex: 1;
+            padding: 10px 10px 10px 40px;
+            border-radius: 25px;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container button {
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+        }
+
+        .speed-dial {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            color: white;
+        }
+
+        .speed-dial .website {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .speed-dial .website img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 10px;
+            font-family: 'Space Mono', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter URL or Search...">
+            <button><img src="https://img.icons8.com/material-outlined/24/000000/search--v1.png" alt="Search"></button>
+        </div>
+        <div class="speed-dial">
+            <a href="https://www.facebook.com" target="_blank" class="website"><img
+                    src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook">Facebook</a>
+            <a href="https://www.instagram.com" target="_blank" class="website"><img
+                    src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt="Instagram">Instagram</a>
+            <a href="https://twitter.com" target="_blank" class="website"><img
+                    src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter">Twitter</a>
+        </div>
+    </div>
+
+    <footer>Created & Powered by <br>
+        <a href="https://facebook.com/UniCoreLLC"
+            style="color: #f05f40; text-decoration: underline; font-weight: bold;">Unicore Softwares LLC</a>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').keypress(function (event) {
+                if (event.which === 13) {
+                    var searchTerm = $(this).val();
+                    if (isValidUrl(searchTerm)) {
+                        if (!searchTerm.startsWith('http://') && !searchTerm.startsWith('https://')) {
+                            searchTerm = 'http://' + searchTerm;
+                        }
+                        window.open(searchTerm, '_blank');
+                    } else if (searchTerm.trim() !== '') {
+                        var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchTerm);
+                        window.open(searchUrl, '_blank');
+                    }
+                }
+            });
+        });
+        function isValidUrl(url) {
+            var pattern = new RegExp('^(https?:\\/\\/)?' + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + '((\\d{1,3}\\.){3}\\d{1,3}))' + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + '(\\?[;&a-z\\d%_.~+=-]*)?' + '(\\#[-a-z\\d_]*)?$', 'i');
+            return !!pattern.test(url);
+        }
+    </script>
+</body>
+
+</html>
