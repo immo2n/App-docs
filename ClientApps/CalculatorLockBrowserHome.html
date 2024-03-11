@@ -131,7 +131,7 @@
             var searchTerm = $('#searchInput').val();
             if (isValidUrl(searchTerm)) {
                 if (!searchTerm.startsWith('http://') && !searchTerm.startsWith('https://')) {
-                    searchTerm = 'http://' + searchTerm;
+                    searchTerm = 'https://' + searchTerm;
                 }
                 window.open(searchTerm, '_blank');
             } else if (searchTerm.trim() !== '') {
